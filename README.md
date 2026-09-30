@@ -58,6 +58,18 @@ Expense_Tracker/
     ├── expense_form.html
     └── analytics.html
 ```
+# Routes
+
+GET       /
+GET/POST  /register
+GET/POST  /login
+GET       /expenses
+GET/POST  /add-expense
+GET/POST  /edit-expense/<expense_id>
+POST      /delete-expense/<expense_id>
+GET/POST  /analytics
+GET       /logout
+
 # Requirements
 
 Python 3.10 or higher

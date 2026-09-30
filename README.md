@@ -57,7 +57,7 @@ Expense_Tracker/
     ├── expenses.html
     ├── expense_form.html
     └── analytics.html
-
+```
 # Requirements
 
 Python 3.10 or higher

@@ -1,4 +1,4 @@
-# PocketTrack - Expense Tracker
+# Expense Tracker
 
 PocketTrack is a Flask-based personal expense tracker that allows users to register, log in, and manage their personal expenses. 
 

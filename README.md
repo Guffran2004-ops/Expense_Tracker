@@ -32,7 +32,7 @@ PocketTrack is a Flask-based personal expense tracker that allows users to regis
 - UUID
 
 ## Project Structure
-
+```text
 Expense_Tracker/
 │
 ├── app.py

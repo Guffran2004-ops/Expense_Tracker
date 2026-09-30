@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}
+    Analytics | PocketTrack
+{% endblock %}
+{% block content %}
+
+<section class="page-head">
+    <div>
+        <h1>Expense Analysis</h1>
+    </div>
+
+    <div class="total-pill">
+        <span>Overall total</span>
+        <strong>
+            {{ total|currency }}
+        </strong>
+    </div>
+</section>
+
+<section class="analytics-grid">
+    <div class="panel">
+        <h2>Find a total</h2>
+        <form method="post" class="filters">
+            <label>
+                On a specific date
+                <input
+                    type="date"
+                    name="date"
+                    value="{{ selected_date }}"
+                >
+            </label>
+            <label>
+                In a month
+                <input
+                    type="month"
+                    name="month"
+                    value="{{ selected_month }}"
+                >
+            </label>
+            <label>
+                In a year
+                <input
+                    type="number"
+                    name="year"
+                    min="2000"
+                    max="2100"
+                    value="{{ selected_year }}"
+                    placeholder="ex: 2026"
+                >
+            </label>
+            <button class="button" type="submit">
+                Calculate
+            </button>
+        </form>
+        {% if selected_date %}
+        <p class="result">
+            On <b>{{ selected_date }}</b>:
+            <strong>{{ date_total|currency }}</strong>
+        </p>
+        {% endif %}
+        {% if selected_month %}
+        <p class="result">
+            In <b>{{ selected_month }}</b>:
+            <strong>{{ month_total|currency }}</strong>
+        </p>
+        {% endif %}
+        {% if selected_year %}
+        <p class="result">
+            In <b>{{ selected_year }}</b>:
+            <strong>{{ year_total|currency }}</strong>
+        </p>
+        {% endif %}
+    </div>
+    <div class="panel">
+        <h2>By category</h2>
+        {% if by_category %}
+        <div class="category-list">
+            {% for category, amount in by_category %}
+            <div>
+                <span>{{ category }}</span>
+                <b>
+                    {{ amount|currency }}
+                </b>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="muted">
+            Add an expense to see category totals here.
+        </p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

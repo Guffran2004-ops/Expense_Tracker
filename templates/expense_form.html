@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ title }} | PocketTrack
+{% endblock %}
+{% block content %}
+
+<section class="form-page">
+    <a class="back" href="{{ url_for('expenses') }}">
+        ← Back to expenses
+    </a>
+    <h1>{{ title }}</h1>
+    <form class="expense-form" method="post">
+        <label>
+            What did you spend on?
+            <input
+                name="name"
+                required
+                maxlength="80"
+                value="{{ values.name }}"
+                placeholder="e.g. Grocery shopping"
+            >
+        </label>
+
+        <label>
+            Category
+            <select name="category" required>
+                <option value="">
+                    Choose a category
+                </option>
+                {% for category in categories %}
+                <option
+                    value="{{ category }}"
+                    {% if values.category == category %}
+                        selected
+                    {% endif %}
+                >
+                    {{ category }}
+                </option>
+                {% endfor %}
+
+            </select>
+        </label>
+
+        <div class="form-grid">
+            <label>
+                Date
+                <input
+                    type="date"
+                    name="date"
+                    required
+                    value="{{ values.date }}"
+                >
+            </label>
+            <label>
+                Amount (₹)
+                <input
+                    type="number"
+                    name="amount"
+                    required
+                    min="0.01"
+                    step="0.01"
+                    value="{{ values.amount }}"
+                    placeholder="0.00"
+                >
+            </label>
+        </div>
+        <button class="button" type="submit">
+            {{ submit_label }}
+        </button>
+
+    </form>
+</section>
+{% endblock %}

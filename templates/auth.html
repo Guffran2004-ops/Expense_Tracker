@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ 'Create account' if mode == 'register' else 'Log in' }} | PocketTrack
+{% endblock %}
+{% block content %}
+<section class="auth-card">
+    <h1>
+        {{ 'Create your account' if mode == 'register' else 'Log in to PocketTrack' }}
+    </h1>
+    <form method="post">
+        <label>
+            Username
+            <input
+                name="username"
+                required
+                value="{{ request.form.get('username', '') }}"
+                placeholder="e.g. Priya"
+            >
+        </label>
+        <label>
+            Password
+            <input
+                type="password"
+                name="password"
+                required
+                placeholder="Enter your password"
+            >
+        </label>
+        <button class="button full" type="submit">
+            {{ 'Create account' if mode == 'register' else 'Log in' }}
+        </button>
+    </form>
+    <p class="switch">
+        {% if mode == 'register' %}
+            Already have an account?
+            <a href="{{ url_for('login') }}">Log in</a>
+        {% else %}
+            New here?
+            <a href="{{ url_for('register') }}">Create an account</a>
+        {% endif %}
+    </p>
+</section>
+{% endblock %}

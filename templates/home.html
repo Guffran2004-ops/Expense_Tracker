@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if session.get('username') %}
+
+<section class="dashboard-head">
+    <div>
+        <h1>Hello, {{ session['username'] }}.</h1>
+    </div>
+    <a class="button" href="{{ url_for('add_expense') }}">
+        Add an expense
+    </a>
+</section>
+<section class="summary-card">
+    <p>Total Expenses:</p>
+    <strong>{{ total|currency }}</strong>
+</section>
+
+<section class="section-heading">
+    <h2>Recent expenses</h2>
+    <a href="{{ url_for('expenses') }}">
+        View all →
+    </a>
+</section>
+
+{% if recent %}
+<div class="recent-list">
+    {% for expense in recent %}
+    <div>
+        <span class="category-dot"></span>
+        <p>
+            <b>{{ expense.name }}</b>
+            <small>
+                {{ expense.category }} · {{ expense.date }}
+            </small>
+        </p>
+        <strong>
+            {{ expense.amount|currency }}
+        </strong>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<div class="empty">
+    <h2>Your list is ready</h2>
+    <p>
+        Add your first expense to begin seeing your spending pattern.
+    </p>
+    <a class="button" href="{{ url_for('add_expense') }}">
+        Add first expense
+    </a>
+</div>
+
+{% endif %}
+{% else %}
+
+<section class="hero">
+    <div>
+        <h1>Know where your money goes.</h1>
+        <p>
+            Record everyday spending in seconds and understand the
+            bigger picture without a complicated spreadsheet.
+        </p>
+        <div class="button-row">
+            <a class="button" href="{{ url_for('register') }}">
+                Get started free
+            </a>
+            <a class="text-link" href="{{ url_for('login') }}">
+                I already have an account
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <p>THIS MONTH</p>
+        <strong>₹8,450.00</strong>
+        <div>
+            <span>Food</span>
+            <b>₹2,650</b>
+        </div>
+
+        <div>
+            <span>Transport</span>
+            <b>₹1,200</b>
+        </div>
+        <div>
+            <span>Bills</span>
+            <b>₹3,100</b>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+
